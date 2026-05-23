@@ -1,4 +1,4 @@
-<table class="tabel" border='1' cellpadding='5' cellspacing='0' width='100%'>
+<table class="tabel-data">
     <thead>
         <tr>
             <th>No</th>
@@ -7,13 +7,13 @@
             <th>Poliklinik</th>
             <th>Dokter</th>
             <th>Tgl Pendaftaran</th>
-            <th colspan='2'>Aksi</th>
+            <th>Aksi</th>
         </tr>
     </thead>
     <tbody>
         <?php
             include 'koneksi.php';
-            // Join 4 tabel untuk mendapatkan nama-nama asli, bukan sekadar ID
+            // Join 4 tabel untuk mendapatkan nama-nama asli
             $query = "SELECT p.no_reg, p.no_rm, ps.nama_pasien, k.nama_klinik, d.nama_dokter, p.tgl_pendaftaran 
                       FROM pendaftaran p 
                       LEFT JOIN pasien ps ON p.no_rm = ps.no_rm 
@@ -32,8 +32,10 @@
                 <td><?= $data['nama_klinik'] ?></td>
                 <td><?= $data['nama_dokter'] ?></td>
                 <td><?= $data['tgl_pendaftaran'] ?></td>
-                <td><a href="registrasi_edit.php?id=<?= $data['no_reg']; ?>">Edit</a></td>
-                <td><a href="registrasi_hapus.php?id=<?= $data['no_reg']; ?>" onclick="return confirm('Hapus pendaftaran ini?')">Hapus</a></td>
+                <td>
+                    <a href="registrasi_edit.php?id=<?= $data['no_reg']; ?>" class="btn-edit">Edit</a>
+                    <a href="registrasi_hapus.php?id=<?= $data['no_reg']; ?>" class="btn-hapus" onclick="return confirm('Hapus pendaftaran ini?')">Hapus</a>
+                </td>
             </tr>
         <?php
             $no++;

@@ -1,25 +1,15 @@
-
 <?php
 include 'koneksi.php';
-$id            =$_POST['id_dokter'];
-$nama          =$_POST['nama_dokter'];
-$spesialis     =$_POST['spesialis'];
+$id        = $_POST['id_dokter'];
+$nama      = $_POST['nama_dokter'];
+$spesialis = $_POST['spesialis'];
 
-$simpan     = mysqli_query($konek,"UPDATE dokter SET nama_dokter='$nama',spesialis='spesialis' WHERE id_dokter='$id'");
+// Catatan: Pada kode lama Anda terdapat bug spesialis='spesialis', sudah diperbaiki menjadi spesialis='$spesialis'
+$update = mysqli_query($konek,"UPDATE dokter SET nama_dokter='$nama', spesialis='$spesialis' WHERE id_dokter='$id'");
 
-if($simpan){
-    echo "
-    <script>
-        alert('Data Berhasil Perbarui');
-        window.location='dokter_form.php';
-    </script>
-    ";
+if($update){
+    echo "<script>alert('Data Berhasil Diperbarui'); window.location='index.php?aksi=dokter';</script>";
 }else{
-    echo "
-    <script>
-        alert('Data Gagal Perbarui');
-        window.location='dokter_form.php';
-    </script>
-    ";
+    echo "<script>alert('Data Gagal Diperbarui'); window.location='index.php?aksi=dokter';</script>";
 }
 ?>
